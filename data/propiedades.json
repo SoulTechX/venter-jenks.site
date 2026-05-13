@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "tipo": "Departamento",
+    "operacion": "Alquiler",
+    "direccion": "Samuel Jones",
+    "dormitorios": 1,
+    "banos": 1,
+    "superficie_m2": null,
+    "fotos": [
+      "/propiedades/samuel-jones/foto1.jpg",
+      "/propiedades/samuel-jones/foto2.jpg",
+      "/propiedades/samuel-jones/foto3.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "tipo": "Casa",
+    "operacion": "Venta",
+    "direccion": "Pto. Moreno 113",
+    "dormitorios": 3,
+    "banos": 2,
+    "superficie_m2": 150,
+    "fotos": [
+      "/propiedades/pto-moreno/foto1.jpg"
+    ]
+  }
+]
