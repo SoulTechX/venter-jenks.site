@@ -40,112 +40,84 @@ const PropertyCard = ({ propiedad }: { propiedad: Propiedad }) => {
   };
 
   return (
-    <div className="group relative w-full overflow-hidden rounded-xl bg-gray-100 shadow-md" style={{ aspectRatio: "3/4" }}>
-      {/* Background Image */}
+    <div className="group relative w-full overflow-hidden rounded-xl bg-gray-200 shadow-lg cursor-pointer" style={{ aspectRatio: "3/4" }}>
+      {/* 1. La imagen sola (estado normal) */}
       <Image
         src={propiedad.fotos[currentImage] || "/placeholder.svg"}
         alt={`${propiedad.tipo} en ${propiedad.direccion}`}
         fill
-        className="object-cover transition-transform duration-500 group-hover:scale-105"
+        className="object-cover transition-transform duration-700 group-hover:scale-110"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
 
-      {/* Navigation Arrows (Visible only on hover, just above footer) */}
+      {/* 2. Flechas pequeñas en la parte inferior (z-20 para que se puedan clickear siempre) */}
       {totalImages > 1 && (
-        <>
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3 opacity-80 transition-opacity hover:opacity-100 group-hover:opacity-100">
           <button
             onClick={prevImage}
-            className="absolute left-2 bottom-14 z-20 flex h-[22px] w-[22px] items-center justify-center rounded-full bg-[#4E9A6A]/60 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:bg-[#4E9A6A] group-hover:opacity-100"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-md transition-all hover:bg-[#4E9A6A] shadow-md"
             aria-label="Foto anterior"
           >
-            <ChevronLeft size={14} />
+            <ChevronLeft size={18} />
           </button>
+          <div className="flex items-center justify-center bg-black/50 px-3 py-1 rounded-full backdrop-blur-md text-white text-xs font-semibold shadow-md">
+            {currentImage + 1} / {totalImages}
+          </div>
           <button
             onClick={nextImage}
-            className="absolute right-2 bottom-14 z-20 flex h-[22px] w-[22px] items-center justify-center rounded-full bg-[#4E9A6A]/60 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:bg-[#4E9A6A] group-hover:opacity-100"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-md transition-all hover:bg-[#4E9A6A] shadow-md"
             aria-label="Siguiente foto"
           >
-            <ChevronRight size={14} />
+            <ChevronRight size={18} />
           </button>
-        </>
+        </div>
       )}
 
-      {/* Hover Overlay */}
-      <div className="absolute inset-0 flex flex-col justify-between opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-10 pointer-events-none">
-        
-        {/* TOP: Header */}
-        <div className="flex w-full items-stretch bg-white/[0.85] backdrop-blur-md">
-          {/* Logo Section */}
-          <div className="flex items-center justify-center bg-[#4E9A6A] px-3 py-2">
-            <LogoSVG />
+      {/* 3. El Marco que aparece al pasar el cursor (Hover Overlay) */}
+      <div className="absolute inset-0 z-10 flex p-3 opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none">
+        {/* El marco interno translúcido (Glassmorphism) del color principal */}
+        <div className="relative flex w-full h-full flex-col justify-between overflow-hidden rounded-lg bg-[#4E9A6A]/85 backdrop-blur-md border border-white/50 shadow-2xl">
+          
+          {/* Cabecera */}
+          <div className="flex flex-col items-center justify-center p-5 border-b border-white/20 bg-white/5">
+             <span className="text-white/90 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">{propiedad.tipo}</span>
+             <span className="text-white text-xl font-black uppercase tracking-tight text-center drop-shadow-sm">{propiedad.operacion}</span>
           </div>
-          {/* Info Section */}
-          <div className="flex flex-1 flex-col items-end justify-center px-4 py-2 text-[#4E9A6A]">
-            <span className="text-xs font-medium uppercase tracking-wider">{propiedad.tipo}</span>
-            <span className="text-lg font-bold uppercase leading-tight">{propiedad.operacion}</span>
-          </div>
-        </div>
 
-        {/* MIDDLE: Pills */}
-        <div className="flex flex-1 flex-col items-start justify-center gap-3 p-5">
-          {/* Pill: Dirección */}
-          <div className="flex items-center gap-3 rounded-full bg-white/[0.82] py-1.5 pl-1.5 pr-4 backdrop-blur-sm shadow-sm">
-            <div className="flex h-8 w-8 items-center justify-center rounded-[10px] bg-[#4E9A6A] text-white">
-              <MapPin size={16} />
+          {/* Datos de la propiedad */}
+          <div className="flex flex-col gap-4 p-6 flex-1 justify-center">
+            <div className="flex items-center gap-3">
+              <MapPin size={20} className="text-white" strokeWidth={2.5} />
+              <span className="text-white font-medium text-sm leading-snug drop-shadow-sm">{propiedad.direccion}</span>
             </div>
-            <span className="font-medium text-[#4E9A6A] text-sm">{propiedad.direccion}</span>
-          </div>
-
-          {/* Pill: Dormitorios */}
-          {propiedad.dormitorios > 0 && (
-            <div className="flex items-center gap-3 rounded-full bg-white/[0.82] py-1.5 pl-1.5 pr-4 backdrop-blur-sm shadow-sm">
-              <div className="flex h-8 w-8 items-center justify-center rounded-[10px] bg-[#4E9A6A] text-white">
-                <BedDouble size={16} />
+            
+            {propiedad.dormitorios > 0 && (
+              <div className="flex items-center gap-3">
+                <BedDouble size={20} className="text-white" strokeWidth={2.5} />
+                <span className="text-white font-medium text-sm drop-shadow-sm">{propiedad.dormitorios} Dormitorios</span>
               </div>
-              <span className="font-medium text-[#4E9A6A] text-sm">{propiedad.dormitorios} Dormitorios</span>
+            )}
+            
+            <div className="flex items-center gap-3">
+              <Bath size={20} className="text-white" strokeWidth={2.5} />
+              <span className="text-white font-medium text-sm drop-shadow-sm">{propiedad.banos} {propiedad.banos === 1 ? "Baño" : "Baños"}</span>
             </div>
-          )}
-
-          {/* Pill: Baños */}
-          <div className="flex items-center gap-3 rounded-full bg-white/[0.82] py-1.5 pl-1.5 pr-4 backdrop-blur-sm shadow-sm">
-            <div className="flex h-8 w-8 items-center justify-center rounded-[10px] bg-[#4E9A6A] text-white">
-              <Bath size={16} />
-            </div>
-            <span className="font-medium text-[#4E9A6A] text-sm">{propiedad.banos} {propiedad.banos === 1 ? "Baño" : "Baños"}</span>
-          </div>
-
-          {/* Pill: M2 */}
-          {propiedad.superficie_m2 && (
-            <div className="flex items-center gap-3 rounded-full bg-white/[0.82] py-1.5 pl-1.5 pr-4 backdrop-blur-sm shadow-sm">
-              <div className="flex h-8 w-8 items-center justify-center rounded-[10px] bg-[#4E9A6A] text-white">
-                <Maximize size={16} />
+            
+            {propiedad.superficie_m2 && (
+              <div className="flex items-center gap-3">
+                <Maximize size={20} className="text-white" strokeWidth={2.5} />
+                <span className="text-white font-medium text-sm drop-shadow-sm">{propiedad.superficie_m2} m²</span>
               </div>
-              <span className="font-medium text-[#4E9A6A] text-sm">{propiedad.superficie_m2} m²</span>
-            </div>
-          )}
-        </div>
-
-        {/* BOTTOM: Dots & Footer */}
-        <div className="flex flex-col">
-          {/* Dots */}
-          {totalImages > 1 && (
-            <div className="flex w-full justify-center gap-2 bg-[#4E9A6A]/[0.88] py-2 backdrop-blur-sm">
-              {propiedad.fotos.map((_, idx) => (
-                <div
-                  key={idx}
-                  className={`h-1.5 w-1.5 rounded-full transition-colors duration-300 ${
-                    currentImage === idx ? "bg-white" : "bg-white/40"
-                  }`}
-                />
-              ))}
-            </div>
-          )}
-
-          {/* Footer */}
-          <div className="flex w-full items-center justify-between bg-[#4E9A6A]/[0.92] px-4 py-3 backdrop-blur-sm">
-            <span className="text-xs font-medium text-white tracking-wide">@venterjenks_inmobiliaria</span>
-            <span className="text-xs font-medium text-white tracking-wide">+54 9 2974365975</span>
+            )}
           </div>
+
+          {/* Pie: Precio (margen abajo para flechas) */}
+          <div className="bg-black/20 p-4 text-center pb-12">
+            <span className="text-white text-lg font-black tracking-wider drop-shadow-md">
+              {propiedad.precio || "Consultar valor"}
+            </span>
+          </div>
+
         </div>
       </div>
     </div>
