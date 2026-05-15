@@ -10,18 +10,7 @@ interface PropertyGalleryProps {
 }
 
 
-const LogoSVG = () => (
-  <svg width="100" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
-    <text x="5" y="16" fontFamily="Georgia, serif" fontSize="14" fill="#FFFFFF" fontWeight="bold">Venter</text>
-    <text x="5" y="32" fontFamily="Georgia, serif" fontSize="14" fill="#FFFFFF" fontWeight="bold">Jenks</text>
-    <g transform="translate(60, 5)" stroke="#FFFFFF" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M5 15 L15 5 L25 15" />
-      <rect x="8" y="15" width="14" height="10" />
-      <circle cx="15" cy="20" r="2" fill="#FFFFFF" />
-      <path d="M15 22 L15 28 M13 28 L17 28 M13 25 L17 25" />
-    </g>
-  </svg>
-);
+
 
 const PropertyCard = ({ propiedad }: { propiedad: Propiedad }) => {
   const [currentImage, setCurrentImage] = useState(0);

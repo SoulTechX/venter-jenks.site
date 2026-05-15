@@ -14,7 +14,7 @@ export default async function Page() {
       <header>
         <nav>
           <div className="logo">
-            <Image src="/img/logo.jpg" alt="Venter Jenks" width={150} height={100} className="logo-img" />
+            <Image src="/img/logo.PNG" alt="Venter Jenks" width={150} height={100} className="logo-img" />
           </div>
           <div className="hamburger">☰</div>
           <ul className="nav-links">
@@ -163,7 +163,7 @@ export default async function Page() {
           <div className="footer-content">
             <div>
               <div className="footer-logo">
-                <Image src="/img/logo2.jpg" alt="Venter Jenks" width={150} height={100} className="logo-img" style={{ width: '100%', maxWidth: '150px', borderRadius: '8px' }} />
+                <Image src="/img/logo2.JPEG" alt="Venter Jenks" width={150} height={100} className="logo-img" style={{ width: '100%', maxWidth: '150px', borderRadius: '8px' }} />
               </div>
               <p>Tu socio de confianza en bienes raíces, servicios legales y contables.</p>
             </div>

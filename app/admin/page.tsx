@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Plus, Image as ImageIcon, Save, Trash2, Edit, Home, Search } from "lucide-react";
 import { Propiedad } from "../../lib/notion";
 import Link from "next/link";
+import Image from "next/image";
 
 // Usamos los datos de prueba como estado inicial para la UI
 import propiedadesData from "../../data/propiedades.json";
@@ -264,9 +265,9 @@ export default function AdminPanel() {
                       <tr key={prop.id} className="hover:bg-gray-50/80 transition-colors group">
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-lg bg-gray-200 overflow-hidden flex-shrink-0 border border-gray-200">
+                            <div className="w-12 h-12 relative rounded-lg bg-gray-200 overflow-hidden flex-shrink-0 border border-gray-200">
                               {prop.fotos?.[0] ? (
-                                <img src={prop.fotos[0]} alt="Miniatura" className="w-full h-full object-cover" />
+                                <Image src={prop.fotos[0]} alt="Miniatura" fill className="object-cover" />
                               ) : (
                                 <div className="w-full h-full flex items-center justify-center text-gray-400">
                                   <ImageIcon size={20} />
