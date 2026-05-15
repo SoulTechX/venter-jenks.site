@@ -2,6 +2,7 @@ import PropertyGallery from "../components/PropertyGallery";
 import { getPropiedades } from "../lib/notion";
 import Image from "next/image";
 import Script from "next/script";
+import { Instagram, Facebook, Linkedin } from "lucide-react";
 
 export const revalidate = 3600; // Revalidar cada hora (ISR)
 
@@ -10,6 +11,22 @@ export default async function Page() {
 
   return (
     <>
+      {/* Redes Sociales Flotantes */}
+      <div className="fixed top-1/2 right-0 -translate-y-1/2 z-40 flex flex-col gap-3 pr-3">
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" 
+           className="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-lg transition-transform duration-300 hover:scale-125 hover:bg-white/30">
+          <Instagram size={24} color="#4E9A6A" strokeWidth={2.5} />
+        </a>
+        <a href="https://www.facebook.com/corredorinmobiliario.venterjenks.7" target="_blank" rel="noopener noreferrer"
+           className="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-lg transition-transform duration-300 hover:scale-125 hover:bg-white/30">
+          <Facebook size={24} color="#4E9A6A" strokeWidth={2.5} />
+        </a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"
+           className="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-lg transition-transform duration-300 hover:scale-125 hover:bg-white/30">
+          <Linkedin size={24} color="#4E9A6A" strokeWidth={2.5} />
+        </a>
+      </div>
+
       {/* Header & Nav */}
       <header>
         <nav>
