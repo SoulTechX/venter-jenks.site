@@ -1,20 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Plus, Image as ImageIcon, Save, Trash2, Edit } from "lucide-react";
 import { Propiedad } from "../../lib/notion";
 import Link from "next/link";
 import Image from "next/image";
 
-// Usamos los datos de prueba como estado inicial para la UI
-import propiedadesData from "../../data/propiedades.json";
-
 export default function AdminPanel() {
-  const [propiedades, setPropiedades] = useState<Propiedad[]>(
-    propiedadesData.map(p => ({ ...p, id: String(p.id) })) as Propiedad[]
-  );
+  const [propiedades, setPropiedades] = useState<Propiedad[]>([]);
   const [isEditing, setIsEditing] = useState(false);
   const [currentProp, setCurrentProp] = useState<Partial<Propiedad> | null>(null);
+
+  useEffect(() => {
+    fetch('/api/propiedades')
+      .then(res => res.json())
+      .then(data => setPropiedades(data))
+      .catch(err => console.error("Error al cargar", err));
+  }, []);
 
   const handleEdit = (prop: Propiedad) => {
     setCurrentProp(prop);
@@ -35,21 +37,37 @@ export default function AdminPanel() {
     setIsEditing(true);
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (currentProp?.id) {
-      setPropiedades(prev => prev.map(p => p.id === currentProp.id ? currentProp as Propiedad : p));
+    if (!currentProp) return;
+    
+    const action = currentProp.id ? 'update' : 'create';
+    const propToSave = { ...currentProp, id: currentProp.id || String(Date.now()) };
+    
+    // Guardamos optimista en la UI
+    if (action === 'update') {
+      setPropiedades(prev => prev.map(p => p.id === propToSave.id ? propToSave as Propiedad : p));
     } else {
-      const newProp = { ...currentProp, id: String(Date.now()) } as Propiedad;
-      setPropiedades([newProp, ...propiedades]);
+      setPropiedades([propToSave as Propiedad, ...propiedades]);
     }
+
     setIsEditing(false);
     setCurrentProp(null);
+
+    // Mandamos al servidor
+    await fetch('/api/propiedades', {
+      method: 'POST',
+      body: JSON.stringify({ action, propiedad: propToSave })
+    });
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (confirm("¿Estás seguro de que querés eliminar esta propiedad?")) {
       setPropiedades(prev => prev.filter(p => p.id !== id));
+      await fetch('/api/propiedades', {
+        method: 'POST',
+        body: JSON.stringify({ action: 'delete', propiedad: { id } })
+      });
     }
   };
 
