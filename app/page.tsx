@@ -32,18 +32,18 @@ export default async function Page() {
   return (
     <>
       {/* Redes Sociales Flotantes */}
-      <div className="fixed top-1/2 right-0 -translate-y-1/2 z-40 flex flex-col gap-3 pr-3">
-        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" 
-           className="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-lg transition-transform duration-300 hover:scale-125 hover:bg-white/30">
-          <InstagramIcon size={24} color="#4E9A6A" />
+      <div className="fixed top-1/2 right-0 -translate-y-1/2 z-40 flex flex-col gap-4 pr-4">
+        <a href="https://www.instagram.com/venterjenks_inmobiliaria?igsh=anR1YmJ2em9xZHNi" target="_blank" rel="noopener noreferrer" 
+           className="transition-transform duration-300 hover:scale-125 drop-shadow-lg">
+          <InstagramIcon size={32} color="#4E9A6A" />
         </a>
         <a href="https://www.facebook.com/corredorinmobiliario.venterjenks.7" target="_blank" rel="noopener noreferrer"
-           className="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-lg transition-transform duration-300 hover:scale-125 hover:bg-white/30">
-          <FacebookIcon size={24} color="#4E9A6A" />
+           className="transition-transform duration-300 hover:scale-125 drop-shadow-lg">
+          <FacebookIcon size={32} color="#4E9A6A" />
         </a>
-        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"
-           className="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-lg transition-transform duration-300 hover:scale-125 hover:bg-white/30">
-          <LinkedinIcon size={24} color="#4E9A6A" />
+        <a href="#" target="_blank" rel="noopener noreferrer"
+           className="transition-transform duration-300 hover:scale-125 drop-shadow-lg">
+          <LinkedinIcon size={32} color="#4E9A6A" />
         </a>
       </div>
 
