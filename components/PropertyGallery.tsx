@@ -2,17 +2,14 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, MapPin, BedDouble, Bath, Maximize } from "lucide-react";
+import { ChevronLeft, ChevronRight, MapPin, BedDouble, Bath, Maximize, X } from "lucide-react";
 import { Propiedad } from "../lib/notion";
 
 interface PropertyGalleryProps {
   initialProperties: Propiedad[];
 }
 
-
-
-
-const PropertyCard = ({ propiedad }: { propiedad: Propiedad }) => {
+const PropertyCard = ({ propiedad, onClick }: { propiedad: Propiedad, onClick: (prop: Propiedad, imageIndex: number) => void }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const totalImages = propiedad.fotos.length;
 
@@ -29,7 +26,11 @@ const PropertyCard = ({ propiedad }: { propiedad: Propiedad }) => {
   };
 
   return (
-    <div className="group relative w-full overflow-hidden rounded-xl bg-gray-200 shadow-lg cursor-pointer" style={{ aspectRatio: "3/4" }}>
+    <div 
+      className="group relative w-full overflow-hidden rounded-xl bg-gray-200 shadow-lg cursor-pointer" 
+      style={{ aspectRatio: "4/3" }}
+      onClick={() => onClick(propiedad, currentImage)}
+    >
       {/* 1. La imagen sola (estado normal) */}
       <Image
         src={propiedad.fotos[currentImage] || "/placeholder.svg"}
@@ -115,6 +116,10 @@ const PropertyCard = ({ propiedad }: { propiedad: Propiedad }) => {
 
 export default function PropertyGallery({ initialProperties }: PropertyGalleryProps) {
   const [filtroOperacion, setFiltroOperacion] = useState<string>("Todas");
+  
+  // Lightbox state
+  const [lightboxProp, setLightboxProp] = useState<Propiedad | null>(null);
+  const [lightboxImageIndex, setLightboxImageIndex] = useState<number>(0);
 
   // Obtener operaciones únicas para los botones de filtro
   const operacionesUnicas = ["Todas", ...Array.from(new Set(initialProperties.map(p => p.operacion)))];
@@ -154,9 +159,16 @@ export default function PropertyGallery({ initialProperties }: PropertyGalleryPr
 
       {/* Grid de Propiedades */}
       {propiedadesFiltradas.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {propiedadesFiltradas.map((prop) => (
-            <PropertyCard key={prop.id} propiedad={prop} />
+            <PropertyCard 
+              key={prop.id} 
+              propiedad={prop} 
+              onClick={(p, imgIndex) => {
+                setLightboxProp(p);
+                setLightboxImageIndex(imgIndex);
+              }} 
+            />
           ))}
         </div>
       ) : (
@@ -168,6 +180,61 @@ export default function PropertyGallery({ initialProperties }: PropertyGalleryPr
           >
             Ver todas las propiedades
           </button>
+        </div>
+      )}
+      {/* Lightbox Modal */}
+      {lightboxProp && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 md:p-10 backdrop-blur-sm"
+          onClick={() => setLightboxProp(null)}
+        >
+          <button 
+            onClick={() => setLightboxProp(null)}
+            className="absolute top-6 right-6 text-white hover:text-gray-300 transition-colors bg-black/50 p-2 rounded-full z-50"
+            aria-label="Cerrar"
+          >
+            <X size={32} />
+          </button>
+          
+          <div 
+            className="relative w-full h-full max-w-6xl max-h-[90vh] flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()} // Evita que se cierre al clickear la imagen
+          >
+            <Image
+              src={lightboxProp.fotos[lightboxImageIndex] || "/placeholder.svg"}
+              alt={`Vista en grande de ${lightboxProp.direccion}`}
+              fill
+              className="object-contain"
+              sizes="100vw"
+            />
+            
+            {lightboxProp.fotos.length > 1 && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLightboxImageIndex((prev) => (prev === 0 ? lightboxProp.fotos.length - 1 : prev - 1));
+                  }}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-3 rounded-full transition-colors z-50"
+                >
+                  <ChevronLeft size={32} />
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLightboxImageIndex((prev) => (prev + 1) % lightboxProp.fotos.length);
+                  }}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-3 rounded-full transition-colors z-50"
+                >
+                  <ChevronRight size={32} />
+                </button>
+                
+                <div className="absolute bottom-4 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-black/60 px-4 py-2 rounded-full text-white font-semibold">
+                  {lightboxImageIndex + 1} / {lightboxProp.fotos.length}
+                </div>
+              </>
+            )}
+          </div>
         </div>
       )}
     </div>
