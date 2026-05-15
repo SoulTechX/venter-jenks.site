@@ -2,7 +2,27 @@ import PropertyGallery from "../components/PropertyGallery";
 import { getPropiedades } from "../lib/notion";
 import Image from "next/image";
 import Script from "next/script";
-import { Instagram, Facebook, Linkedin } from "lucide-react";
+const InstagramIcon = ({ size, color }: any) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+  </svg>
+);
+
+const FacebookIcon = ({ size, color }: any) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+  </svg>
+);
+
+const LinkedinIcon = ({ size, color }: any) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+    <rect x="2" y="9" width="4" height="12"></rect>
+    <circle cx="4" cy="4" r="2"></circle>
+  </svg>
+);
 
 export const revalidate = 3600; // Revalidar cada hora (ISR)
 
@@ -15,15 +35,15 @@ export default async function Page() {
       <div className="fixed top-1/2 right-0 -translate-y-1/2 z-40 flex flex-col gap-3 pr-3">
         <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" 
            className="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-lg transition-transform duration-300 hover:scale-125 hover:bg-white/30">
-          <Instagram size={24} color="#4E9A6A" strokeWidth={2.5} />
+          <InstagramIcon size={24} color="#4E9A6A" />
         </a>
         <a href="https://www.facebook.com/corredorinmobiliario.venterjenks.7" target="_blank" rel="noopener noreferrer"
            className="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-lg transition-transform duration-300 hover:scale-125 hover:bg-white/30">
-          <Facebook size={24} color="#4E9A6A" strokeWidth={2.5} />
+          <FacebookIcon size={24} color="#4E9A6A" />
         </a>
         <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"
            className="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-lg transition-transform duration-300 hover:scale-125 hover:bg-white/30">
-          <Linkedin size={24} color="#4E9A6A" strokeWidth={2.5} />
+          <LinkedinIcon size={24} color="#4E9A6A" />
         </a>
       </div>
 
