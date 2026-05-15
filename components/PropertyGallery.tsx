@@ -28,7 +28,7 @@ const PropertyCard = ({ propiedad, onClick }: { propiedad: Propiedad, onClick: (
   return (
     <div 
       className="group relative w-full overflow-hidden rounded-xl bg-gray-200 shadow-lg cursor-pointer" 
-      style={{ aspectRatio: "4/3" }}
+      style={{ aspectRatio: "3/2" }}
       onClick={() => onClick(propiedad, currentImage)}
     >
       {/* 1. La imagen sola (estado normal) */}
@@ -159,7 +159,7 @@ export default function PropertyGallery({ initialProperties }: PropertyGalleryPr
 
       {/* Grid de Propiedades */}
       {propiedadesFiltradas.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {propiedadesFiltradas.map((prop) => (
             <PropertyCard 
               key={prop.id} 
