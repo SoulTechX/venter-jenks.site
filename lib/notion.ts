@@ -29,7 +29,7 @@ export async function getPropiedades(): Promise<Propiedad[]> {
   }
 
   try {
-    const response = await notion.databases.query({
+    const response = await (notion.databases as any).query({
       database_id: process.env.NOTION_DATABASE_ID,
       filter: {
         property: "Activo",
