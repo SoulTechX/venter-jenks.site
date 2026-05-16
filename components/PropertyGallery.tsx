@@ -64,9 +64,9 @@ const PropertyCard = ({ propiedad, onClick }: { propiedad: Propiedad, onClick: (
       )}
 
       {/* 3. El Marco que aparece al pasar el cursor (Hover Overlay) */}
-      <div className="absolute inset-0 z-10 flex p-3 opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none">
+      <div className="absolute inset-0 z-10 flex opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none">
         {/* El marco interno translúcido (Glassmorphism) del color principal */}
-        <div className="relative flex w-full h-full flex-col justify-between overflow-hidden rounded-lg bg-[#4E9A6A]/85 backdrop-blur-md border border-white/50 shadow-2xl">
+        <div className="relative flex w-full h-full flex-col justify-between overflow-hidden bg-[#4E9A6A]/85 backdrop-blur-md border border-white/50 shadow-2xl">
           
           {/* Cabecera */}
           <div className="flex flex-col items-center justify-center p-5 border-b border-white/20 bg-white/5">
@@ -140,7 +140,7 @@ export default function PropertyGallery({ initialProperties }: PropertyGalleryPr
   return (
     <div className="container mx-auto px-4 py-12">
       {/* Filtros */}
-      <div className="mb-10 flex flex-wrap justify-center gap-3">
+      <div className="mb-20 flex flex-wrap justify-center gap-3">
         {operacionesUnicas.map(op => (
           <button
             key={op}
@@ -158,7 +158,7 @@ export default function PropertyGallery({ initialProperties }: PropertyGalleryPr
 
       {/* Grid de Propiedades */}
       {propiedadesFiltradas.length > 0 ? (
-        <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-2">
+        <div className="max-w-[1100px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
           {propiedadesFiltradas.map((prop) => (
             <PropertyCard 
               key={prop.id} 
