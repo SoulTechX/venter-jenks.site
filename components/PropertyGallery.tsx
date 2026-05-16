@@ -66,7 +66,7 @@ const PropertyCard = ({ propiedad, onClick }: { propiedad: Propiedad, onClick: (
       {/* 3. El Marco que aparece al pasar el cursor (Hover Overlay) */}
       <div className="absolute inset-0 z-10 flex opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none">
         {/* El marco interno translúcido (Glassmorphism) del color principal */}
-        <div className="relative flex w-full h-full flex-col justify-between overflow-hidden bg-[#4E9A6A]/85 backdrop-blur-md border border-white/50 shadow-2xl">
+        <div className="relative flex w-full h-full flex-col justify-between overflow-hidden rounded-xl bg-[#4E9A6A]/85 backdrop-blur-md">
           
           {/* Cabecera */}
           <div className="flex flex-col items-center justify-center p-5 border-b border-white/20 bg-white/5">
@@ -140,7 +140,7 @@ export default function PropertyGallery({ initialProperties }: PropertyGalleryPr
   return (
     <div className="container mx-auto px-4 py-12">
       {/* Filtros */}
-      <div className="mb-20 flex flex-wrap justify-center gap-3">
+      <div className="mb-16 flex flex-wrap justify-center gap-4">
         {operacionesUnicas.map(op => (
           <button
             key={op}
@@ -158,7 +158,7 @@ export default function PropertyGallery({ initialProperties }: PropertyGalleryPr
 
       {/* Grid de Propiedades */}
       {propiedadesFiltradas.length > 0 ? (
-        <div className="max-w-[1100px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-4 place-items-center">
           {propiedadesFiltradas.map((prop) => (
             <PropertyCard 
               key={prop.id} 
@@ -189,10 +189,10 @@ export default function PropertyGallery({ initialProperties }: PropertyGalleryPr
         >
           <button 
             onClick={() => setLightboxProp(null)}
-            className="absolute top-6 right-6 text-white hover:text-gray-300 transition-colors bg-black/50 p-2 rounded-full z-50"
+            className="absolute top-6 right-6 text-white hover:text-gray-300 transition-colors bg-black/60 p-3 rounded-full z-[9999]"
             aria-label="Cerrar"
           >
-            <X size={32} />
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
           </button>
           
           <div 
@@ -214,18 +214,18 @@ export default function PropertyGallery({ initialProperties }: PropertyGalleryPr
                     e.stopPropagation();
                     setLightboxImageIndex((prev) => (prev === 0 ? lightboxProp.fotos.length - 1 : prev - 1));
                   }}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-3 rounded-full transition-colors z-50"
+                  className="absolute left-6 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/90 text-white p-4 rounded-full transition-colors z-[9999]"
                 >
-                  <ChevronLeft size={32} />
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
                 </button>
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     setLightboxImageIndex((prev) => (prev + 1) % lightboxProp.fotos.length);
                   }}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-3 rounded-full transition-colors z-50"
+                  className="absolute right-6 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/90 text-white p-4 rounded-full transition-colors z-[9999]"
                 >
-                  <ChevronRight size={32} />
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                 </button>
                 
                 <div className="absolute bottom-4 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-black/60 px-4 py-2 rounded-full text-white font-semibold">
