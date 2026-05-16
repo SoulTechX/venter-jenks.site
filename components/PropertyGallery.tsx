@@ -70,40 +70,39 @@ const PropertyCard = ({ propiedad, onClick }: { propiedad: Propiedad, onClick: (
           
           {/* Cabecera */}
           <div className="flex flex-col items-center justify-center p-5 border-b border-white/20 bg-white/5">
-             <span className="text-white/90 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">{propiedad.tipo}</span>
-             <span className="text-white text-xl font-black uppercase tracking-tight text-center drop-shadow-sm">{propiedad.operacion}</span>
+             <span className="!text-white/90 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">{propiedad.tipo}</span>
+             <span className="!text-white text-xl font-black uppercase tracking-tight text-center drop-shadow-sm">{propiedad.operacion}</span>
           </div>
 
           {/* Datos de la propiedad */}
           <div className="flex flex-col gap-4 p-6 flex-1 justify-center">
             <div className="flex items-center gap-3">
-              <MapPin size={20} className="text-white" strokeWidth={2.5} />
-              <span className="text-white font-medium text-sm leading-snug drop-shadow-sm">{propiedad.direccion}</span>
+              <MapPin size={20} className="!text-white" strokeWidth={2.5} />
+              <span className="!text-white font-medium text-sm leading-snug drop-shadow-sm">{propiedad.direccion}</span>
             </div>
             
             {propiedad.dormitorios > 0 && (
               <div className="flex items-center gap-3">
-                <BedDouble size={20} className="text-white" strokeWidth={2.5} />
-                <span className="text-white font-medium text-sm drop-shadow-sm">{propiedad.dormitorios} Dormitorios</span>
+                <BedDouble size={20} className="!text-white" strokeWidth={2.5} />
+                <span className="!text-white font-medium text-sm drop-shadow-sm">{propiedad.dormitorios} Dormitorios</span>
               </div>
             )}
             
             <div className="flex items-center gap-3">
-              <Bath size={20} className="text-white" strokeWidth={2.5} />
-              <span className="text-white font-medium text-sm drop-shadow-sm">{propiedad.banos} {propiedad.banos === 1 ? "Baño" : "Baños"}</span>
+              <Bath size={20} className="!text-white" strokeWidth={2.5} />
+              <span className="!text-white font-medium text-sm drop-shadow-sm">{propiedad.banos} {propiedad.banos === 1 ? "Baño" : "Baños"}</span>
             </div>
             
             {propiedad.superficie_m2 && (
               <div className="flex items-center gap-3">
-                <Maximize size={20} className="text-white" strokeWidth={2.5} />
-                <span className="text-white font-medium text-sm drop-shadow-sm">{propiedad.superficie_m2} m²</span>
+                <Maximize size={20} className="!text-white" strokeWidth={2.5} />
+                <span className="!text-white font-medium text-sm drop-shadow-sm">{propiedad.superficie_m2} m²</span>
               </div>
             )}
           </div>
 
-          {/* Pie: Precio (margen abajo para flechas) */}
           <div className="bg-black/20 p-4 text-center pb-12">
-            <span className="text-white text-lg font-black tracking-wider drop-shadow-md">
+            <span className="!text-white text-lg font-black tracking-wider drop-shadow-md">
               {propiedad.precio || "Consultar valor"}
             </span>
           </div>
@@ -159,7 +158,7 @@ export default function PropertyGallery({ initialProperties }: PropertyGalleryPr
 
       {/* Grid de Propiedades */}
       {propiedadesFiltradas.length > 0 ? (
-        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-2">
           {propiedadesFiltradas.map((prop) => (
             <PropertyCard 
               key={prop.id} 
