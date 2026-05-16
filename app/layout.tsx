@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Venter Jenks | Inmobiliaria",
+  title: "Venter Jenks | Estudio",
   description: "Venter Jenks Inmobiliaria - Patagonia. Tasaciones, propiedades y servicios jurídicos.",
 };
 
