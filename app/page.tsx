@@ -24,7 +24,7 @@ const LinkedinIcon = ({ size, color }: any) => (
   </svg>
 );
 
-export const revalidate = 3600; // Revalidar cada hora (ISR)
+export const dynamic = 'force-dynamic'; // Forzar lectura en vivo de la BD siempre
 
 export default async function Page() {
   const propiedades = await getPropiedades();
