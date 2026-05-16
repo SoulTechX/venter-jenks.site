@@ -1,7 +1,11 @@
 (function() {
-    document.addEventListener("DOMContentLoaded", () => {
+    const initParticles = () => {
         const hero = document.querySelector('.hero');
-        if (!hero) return;
+        if (!hero) {
+            // Si no encuentra el elemento, intentar de nuevo en un momento
+            setTimeout(initParticles, 500);
+            return;
+        }
 
         // Ensure hero is relative so the absolute canvas stays inside it
         if (window.getComputedStyle(hero).position === 'static') {
@@ -138,5 +142,12 @@
         };
 
         loop();
-    });
+    };
+
+    // Initialize as soon as possible, or wait for DOM if not ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initParticles);
+    } else {
+        initParticles();
+    }
 })();
