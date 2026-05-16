@@ -66,7 +66,7 @@ const PropertyCard = ({ propiedad, onClick }: { propiedad: Propiedad, onClick: (
       {/* 3. El Marco que aparece al pasar el cursor (Hover Overlay) */}
       <div className="absolute inset-0 z-10 flex opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none">
         {/* El marco interno translúcido (Glassmorphism) del color principal */}
-        <div className="relative flex w-full h-full flex-col justify-between overflow-hidden rounded-xl bg-[#4E9A6A]/85 backdrop-blur-md">
+        <div className="relative flex w-full h-full flex-col justify-between overflow-hidden rounded-xl bg-[#4E9A6A]/60 backdrop-blur-md">
           
           {/* Cabecera */}
           <div className="flex flex-col items-center justify-center p-5 border-b border-white/20 bg-white/5">
