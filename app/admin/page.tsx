@@ -202,7 +202,9 @@ export default function AdminPanel() {
                     <label className="block text-sm font-semibold mb-1 flex items-center gap-2" style={{ color: 'var(--text-dark)' }}>
                       <ImageIcon size={16} /> Links de las fotos
                     </label>
-                    <p className="text-xs text-gray-500 mb-2">Pegá los links de las fotos generados por tu panel (fotos.venter-jenks.site) separados por comas.</p>
+                    <p className="text-xs text-gray-500 mb-2">
+                      Pegá los links de las fotos generados por tu panel (<a href="https://fotos.venter-jenks.site/panel.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold hover:underline">fotos.venter-jenks.site/panel.html</a>) separados por comas.
+                    </p>
                     <textarea 
                       className="form-control"
                       rows={3}
